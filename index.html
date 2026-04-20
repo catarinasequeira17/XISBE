@@ -24,6 +24,47 @@
     section {
       padding: 15px;
     }
+    .language-toggle {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: 2%;
+      font-family: Arial, sans-serif;
+      font-size: 26px;
+      font-weight: 400;
+      line-height: 1;
+      
+    }
+
+    .language-option {
+      background: transparent;
+      border: none;
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
+      color: white;
+      opacity: 1;
+      transition: color 0.2s ease, opacity 0.2s ease;
+    }
+
+    .language-option.active {
+      color: #ff9114;
+      font-weight: bold;
+      opacity: 1;
+    }
+
+    .language-option:hover {
+      opacity: 0.8;
+    }
+
+    .language-separator {
+      color: white;
+    }
+
+
     .countdown-e-banner {
       padding: 0px 0 0px 0;
     }
@@ -512,6 +553,11 @@
   </style>
   <body>    
     <div id="header-container"></div>
+    <div class="language-toggle">
+      <button class="language-option active" type="button" data-lang="pt">PT</button>
+      <span class="language-separator">/</span>
+      <button class="language-option" type="button" data-lang="en">EN</button>
+    </div>
     <div class="countdown-e-banner">
       <div class="sec-countdown">
         <div class="texto-countdown">
@@ -698,6 +744,20 @@
       
       setInterval(updateCountdown, 1000);
       
+      
+    const languageButtons = document.querySelectorAll('.language-option');
+    let currentLanguage = 'en';
+
+    languageButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        currentLanguage = button.dataset.lang;
+
+        languageButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        console.log('Selected language:', currentLanguage);
+      });
+    });
     </script>
   </body>
 </html>
